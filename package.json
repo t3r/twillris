@@ -1,0 +1,27 @@
+{
+  "name": "allris2fb",
+  "version": "0.1.0",
+  "description": "allris2fb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/t3r/twillris.git"
+  },
+  "keywords": [
+    "allris",
+    "facebook"
+  ],
+  "author": "Torsten Dreyer (torsten@t3r.de)",
+  "license": "GPL-2.0+",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "got": "^9.6.0",
+    "icalendar": "^0.7.1",
+    "moment": "^2.24.0",
+    "twit": "^2.2.11"
+  }
+}
