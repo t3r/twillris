@@ -18,20 +18,26 @@ const T = new Twit({
 })
 
 function PublishTwitter( entry ) {
-  console.log(entry);
   const TWEET_PREFIX = process.env.TWEET_PREFIX || 'Sitzung #Wentorf: ';
   const status = `${TWEET_PREFIX}${moment(entry.startDate).format('D.M.YYYY HH:mm')} | ${entry.summary}, ${entry.location} (Tagesordnung: ${entry.link})`;
-  console.log( status);
+  console.log( entry, "==>", status );
+
+  // return Promise.resolve({ status });
   return T.post('statuses/update', { status });
 }
 
 exports.handler = async (event) => {
   const now = new Date();
-  const from = process.env.FROM_DATE || ('00'+now.getUTCDate()).slice(-2) + '.' + ('00'+(now.getUTCMonth()+1)).slice(-2) + '.' + now.getUTCFullYear();
-  console.log("publishing date", from );
+  const fromDate = process.env.FROM_DATE || ('00'+now.getUTCDate()).slice(-2) + '.' + ('00'+(now.getUTCMonth()+1)).slice(-2) + '.' + now.getUTCFullYear();
+  let toDate;
+  if( process.env.DATE_RANGE_DAYS ) {
+    const d2 = moment().add( Number(process.env.DATE_RANGE_DAYS), 'days' ).toDate();
+    toDate = ('00'+d2.getUTCDate()).slice(-2) + '.' + ('00'+(d2.getUTCMonth()+1)).slice(-2) + '.' + d2.getUTCFullYear();
+  }
+  console.log("publishing date", fromDate, toDate );
   let allris = new Allris( process.env.ALLRIS_URL );
   try {
-    let result = await allris.getCalendar( from )
+    let result = await allris.getCalendar( fromDate, toDate )
     if( result && Array.isArray(result) ) {
       const proms = [];
       result.forEach( async (entry) => {
@@ -39,7 +45,6 @@ exports.handler = async (event) => {
       })
       try {
         let publishResult = await Promise.all( proms );
-        console.log(publishResult);
       }
       catch( err ) {
         console.error("Error publishing twitter",err);
