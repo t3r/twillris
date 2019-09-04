@@ -44,11 +44,16 @@ Allris.prototype.getAgenda = function( options ) {
     ['SILFDNR', options.siLfdNr  ],
   ]);
 
-  return got('to010.asp', {
-    baseUrl: this.baseUrl,
-    encoding: 'latin1',
-    query
-  })
+  const action = options.url ?
+    got( options.url, {
+      encoding: 'latin1'
+    }) :
+    got('to010.asp', {
+      baseUrl: this.baseUrl,
+      encoding: 'latin1',
+      query
+    });
+  return action
   .then( response => {
     const $ = cheerio.load(response.body);
     const reply = []

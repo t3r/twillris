@@ -3,7 +3,7 @@
 class AllrisAgendaEntry {
   constructor( topic, description ) {
     this.topic = topic;
-    this.dscription = (description || '').replace(/(\r\n|\n|\r)/gm," ");
+    this.description = (description || '').replace(/(\r\n|\n|\r)/gm," ");
   }
 }
 

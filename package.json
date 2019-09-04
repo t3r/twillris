@@ -4,7 +4,7 @@
   "description": "allris2fb",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
+    "test": "node_modules/mocha/bin/mocha tests"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,10 @@
     "icalendar": "^0.7.1",
     "moment": "^2.24.0",
     "twit": "^2.2.11"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-arrays": "^2.0.0",
+    "mocha": "^5.2.0"
   }
 }
