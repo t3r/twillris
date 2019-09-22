@@ -22,7 +22,7 @@
     "dotenv": "^8.1.0",
     "got": "^9.6.0",
     "icalendar": "^0.7.1",
-    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.26",
     "twit": "^2.2.11"
   },
   "devDependencies": {

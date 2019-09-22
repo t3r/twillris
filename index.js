@@ -1,7 +1,7 @@
 'use strict;';
 const Allris = require('./allris').Allris;
 const Twit = require('twit')
-const moment = require('moment');
+const moment = require('moment-timezone');
 moment.locale('de');
 
 if( process.env.node_env !== 'production' )
@@ -19,10 +19,10 @@ const T = new Twit({
 
 function PublishTwitter( entry ) {
   const TWEET_PREFIX = process.env.TWEET_PREFIX || 'Sitzung #Wentorf: ';
-  const status = `${TWEET_PREFIX}${moment(entry.startDate).format('D.M.YYYY HH:mm')} | ${entry.summary}, ${entry.location} (Tagesordnung: ${entry.link})`;
+  const status = `${TWEET_PREFIX}${moment(entry.startDate).tz('Europe/Berlin').format('D.M.YYYY HH:mm')} | ${entry.summary}, ${entry.location} (Tagesordnung: ${entry.link})`;
   console.log( entry, "==>", status );
 
-  // return Promise.resolve({ status });
+  //return Promise.resolve({ status });
   return T.post('statuses/update', { status });
 }
 
