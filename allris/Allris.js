@@ -21,7 +21,7 @@ Allris.prototype.getCalendar = function( startDate, endDate ) {
 
   return got('si010_e.asp', {
     baseUrl: this.baseUrl,
-    encoding: 'latin1',
+    encoding: 'utf8',
     query
   })
   .then( response => {
