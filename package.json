@@ -20,7 +20,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.1.0",
-    "got": "^9.6.0",
+    "got": "^11.8.5",
     "icalendar": "^0.7.1",
     "moment-timezone": "^0.5.26",
     "twit": "^2.2.11"
